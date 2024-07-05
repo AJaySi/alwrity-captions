@@ -13,7 +13,7 @@ import google.generativeai as genai
 def main():
     # Set page configuration
     st.set_page_config(
-        page_title="Alwrity",
+        page_title="Alwrity - AI insta caption writer",
         layout="wide",
     )
     # Remove the extra spaces from margin top.
@@ -25,22 +25,39 @@ def main():
                     padding-left: 1rem;
                     padding-right: 1rem;
                 }
-        </style>
-        """, unsafe_allow_html=True)
-    st.markdown(f"""
-      <style>
-      [class="st-emotion-cache-7ym5gk ef3psqc12"]{{
-            display: inline-block;
-            padding: 5px 20px;
-            background-color: #4681f4;
-            color: #FBFFFF;
-            width: 300px;
-            height: 35px;
+        ::-webkit-scrollbar-track {
+        background: #e1ebf9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #90CAF9;
+            border-radius: 10px;
+            border: 3px solid #e1ebf9;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64B5F6;
+        }
+
+        ::-webkit-scrollbar {
+            width: 16px;
+        }
+        div.stButton > button:first-child {
+            background: #1565C0;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
             text-align: center;
             text-decoration: none;
+            display: inline-block;
             font-size: 16px;
-            border-radius: 8px;’
-      }}
+            margin: 10px 2px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+        }
       </style>
     """
     , unsafe_allow_html=True)
@@ -57,22 +74,69 @@ def main():
     st.title("✍️ Alwrity - AI Instagram Caption Generator")
 
     # Input section
-    with st.expander("**PRO-TIP** - Read the instructions below.", expanded=True):
-        input_insta_keywords = st.text_input('**Enter main keywords of Your instagram caption!**')
-        col1, col2, space, col3, col4 = st.columns([5, 5, 0.5, 5, 5])
+    with st.expander("**💡  Instructions:**  Read the following before generating your Instagram captions.", expanded=True):
+        st.markdown("**Let's create the perfect caption!** ✍️")
+    
+        # Main Keywords
+        input_insta_keywords = st.text_input("**Enter your main keywords:**", placeholder="e.g., travel, adventure, sunset")
+        # Input Columns
+        col1, col2, col3, col4 = st.columns([3, 3, 3, 3])
+    
         with col1:
-            input_insta_type = st.selectbox('Voice Tone', ('Neutral', 'Formal', 'Casual', 'Funny', 
-                'Optimistic', 'Assertive', 'Friendly', 'Encouraging', 'Sarcastic'), index=0)
+            # Voice Tone
+            input_insta_type = st.selectbox(
+                "**Voice Tone:**",
+                (
+                    "Neutral 😐",
+                    "Formal 👔",
+                    "Casual 😎",
+                    "Funny 😂",
+                    "Optimistic 😊",
+                    "Assertive 💪",
+                    "Friendly 🤗",
+                    "Encouraging 👍",
+                    "Sarcastic 🙄"
+                ),
+                index=0
+            )   
         with col2:
-            input_insta_cta = st.selectbox('CTA (Call To Action)', ('Shop Now', 
-                'Learn More', 'Swipe Up', 'Sign Up', 'Link in Bio', 'Sense of urgency'), index=0)
+            # CTA (Call To Action)
+            input_insta_cta = st.selectbox(
+                "**Call To Action:**",
+                (
+                    "Shop Now 🛒",
+                    "Learn More 📚",
+                    "Swipe Up 👉",
+                    "Sign Up ✍️",
+                    "Link in Bio 🔗",
+                    "Sense of Urgency ⏰"
+                ),
+                index=0
+            )
         with col3:
-            input_insta_audience = st.selectbox('Choose Target Audience', ('For All', 
-                'Age:18-24 (Gen Z)', 'Age:25-34 (Millennials)'), index=0)
+            # Target Audience
+            input_insta_audience = st.selectbox(
+                "**Target Audience:**",
+                (
+                    "For All 🌎",
+                    "Age: 18-24 (Gen Z) 🧑‍🤝‍🧑",
+                    "Age: 25-34 (Millennials) 👨‍👩‍👧‍👦"
+                ),
+                index=0
+            )
         with col4:
-            input_insta_language = st.selectbox('Choose Language', ('English', 'Hindustani',
-                'Chinese', 'Hindi', 'Spanish'), index=0)
-
+            # Language
+            input_insta_language = st.selectbox(
+                "**Language:**",
+                (
+                    "English",
+                    "Hindustani",
+                    "Chinese",
+                    "Hindi",
+                    "Spanish"
+                ),
+                index=0
+            )
     
         # Generate Blog Title button
         if st.button('**Get Instagram Captions**'):
@@ -89,7 +153,7 @@ def main():
                             )
                     if insta_captions:
                         st.subheader('**👩👩🔬Go Viral, with these Instagram captions!🎆🎇 🎇**')
-                        st.code(insta_captions)
+                        st.markdown(insta_captions)
                     else:
                         st.error("💥**Failed to generate instagram Captions. Please try again!**")
 
@@ -102,7 +166,7 @@ def generate_insta_captions(input_insta_keywords, input_insta_type, input_insta_
     if input_insta_keywords:
         prompt = f"""As an instagram expert and experienced content writer, 
         I will provide you with my 'instagram caption keywords', along with CTA, Target Audience & voice tone.
-        Your task is to write 3 instagram captions.
+        Your task is to write 5 instagram captions.
 
         Follow below guidelines to generate instagram captions:
         1). Front-Loading: Capture attention by placing key info at the beginning of your captions.
@@ -137,10 +201,10 @@ def generate_text_with_exception_handling(prompt):
         genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
 
         generation_config = {
-            "temperature": 1,
+            "temperature": 0.6,
             "top_p": 0.95,
             "top_k": 0,
-            "max_output_tokens": 8192,
+            "max_output_tokens": 1096,
         }
 
         safety_settings = [
@@ -162,7 +226,7 @@ def generate_text_with_exception_handling(prompt):
             },
         ]
 
-        model = genai.GenerativeModel(model_name="gemini-1.5-pro-latest",
+        model = genai.GenerativeModel(model_name="gemini-1.5-flash",
                                       generation_config=generation_config,
                                       safety_settings=safety_settings)
 
