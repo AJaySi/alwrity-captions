@@ -37,16 +37,20 @@ To run the Alwrity program using Streamlit, follow these steps:
 3. **Navigate to the Directory:** Change your current directory to the Alwrity project directory:
 
     ```
-    cd alwrity
+    cd alwrity-captions
     ```
-
-4. **Run the Program:** Use the `streamlit run` command to run the Alwrity program:
+4. **Update Google API Key:**
+    ```
+    cd $env:GOOGLE_API_KEY = "input_your_Google_API_key_here"
+    ```
+   
+5. **Run the Program:** Use the `streamlit run` command to run the Alwrity program:
 
     ```
     streamlit run insta_captions_app.py
     ```
 
-5. **Access the Web App:** Once the program is running, open a web browser and navigate to the URL provided by Streamlit to access the Alwrity web application.
+6. **Access the Web App:** Once the program is running, open a web browser and navigate to the URL provided by Streamlit to access the Alwrity web application.
 
 With these steps, you can easily set up and run the Alwrity program with Streamlit on your local machine. Start generating captivating Instagram captions today and take your social media game to the next level!
 
