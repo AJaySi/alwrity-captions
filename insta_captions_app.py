@@ -164,20 +164,18 @@ def generate_insta_captions(input_insta_keywords, input_insta_type, input_insta_
 
     # If keywords and content both are given.
     if input_insta_keywords:
-        prompt = f"""As an instagram expert and experienced content writer, 
-        I will provide you with my 'instagram caption keywords', along with CTA, Target Audience & voice tone.
-        Your task is to write 5 instagram captions.
+        prompt = f"""You are an experienced Instagram content creator and expert copywriter. Using the details provided below, generate 5 engaging Instagram captions that adhere to the following guidelines:
 
-        Follow below guidelines to generate instagram captions:
-        1). Front-Loading: Capture attention by placing key info at the beginning of your captions.
-        2). Optimise your captions for {input_insta_cta} Call-to-Action (CTA). 
-        3). Hashtag Usage: Limit yourself to four relevant hashtags per caption.
-        4). Brand Voice and Tone: Use and convey {input_insta_type} voice tone in your captions.
-        5). Optimise your captions for {input_insta_audience} target audience.
-        6). Emojis: Inject personality and emotion into your captions with emojis.
-        7). Brevity: Keep your captions concise and to the point.
-        8). Important: Your response should be in {input_insta_language} language.
-
+        1). Start with a strong, attention-grabbing opening that front-loads key information.
+        2). Keep the language concise, clear, and impactful.
+        3). Incorporate storytelling elements or emotional appeal where relevant.
+        4). Use a call-to-action optimized for {input_insta_cta}.
+        5). Reflect a {input_insta_type} voice and tone consistently.
+        6). Tailor the captions for the {input_insta_audience} target audience.
+        7). Include up to four relevant hashtags per caption.
+        8). Use emojis to add personality and break up the text.
+        9). Ensure the captions are written in {input_insta_language}.
+        
         \nInstagram caption keywords: '{input_insta_keywords}'\n
         """
         insta_captions = generate_text_with_exception_handling(prompt)
