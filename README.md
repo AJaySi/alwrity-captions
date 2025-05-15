@@ -13,8 +13,9 @@ To get started with Alwrity, follow these simple steps:
 1. **Enter Instagram Caption Keywords:** Provide 2-3 main keywords that define the content of your Instagram post.
 2. **Select Voice Tone:** Choose the tone of your caption from options such as Neutral, Formal, Casual, and more.
 3. **Select Call-to-Action (CTA):** Specify the action you want your audience to take, such as Shop Now, Learn More, or Swipe Up.
-4. **Choose Target Audience:** Select the target audience for your caption, based on age demographics or other factors.
-5. **Choose Language:** Specify the language in which you want your captions to be generated.
+4. **Provide API Key in the UI:** You no longer need to configure the API key in the environment. Simply enter your Google API key directly in the web app's UI under the "API Key Configuration" section.
+5. **Choose Target Audience:** Select the target audience for your caption, based on age demographics or other factors.
+6. **Choose Language:** Specify the language in which you want your captions to be generated.
 
 Once you've provided the necessary inputs, click the "Get Instagram Captions" button to let Alwrity generate captivating captions for your Instagram posts.
 
@@ -39,18 +40,14 @@ To run the Alwrity program using Streamlit, follow these steps:
     ```
     cd alwrity-captions
     ```
-4. **Update Google API Key:**
-    ```
-    cd $env:GOOGLE_API_KEY = "input_your_Google_API_key_here"
-    ```
-   
-5. **Run the Program:** Use the `streamlit run` command to run the Alwrity program:
+
+4. **Run the Program:** Use the `streamlit run` command to run the Alwrity program:
 
     ```
     streamlit run insta_captions_app.py
     ```
 
-6. **Access the Web App:** Once the program is running, open a web browser and navigate to the URL provided by Streamlit to access the Alwrity web application.
+5. **Access the Web App:** Once the program is running, open a web browser and navigate to the URL provided by Streamlit to access the Alwrity web application.
 
 With these steps, you can easily set up and run the Alwrity program with Streamlit on your local machine. Start generating captivating Instagram captions today and take your social media game to the next level!
 

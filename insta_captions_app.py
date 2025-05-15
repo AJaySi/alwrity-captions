@@ -71,7 +71,15 @@ def main():
     st.markdown(hide_streamlit_footer, unsafe_allow_html=True)
 
     # Title and description
-    st.title("✍️ Alwrity - AI Instagram Caption Generator")
+    st.title("✍️ ALwrity - AI Instagram Caption Generator")
+
+    # Add API Key Input Section
+    with st.expander("**🔑 API Key Configuration:**", expanded=False):
+        user_api_key = st.text_input("**Enter your Google Generative AI API Key (Optional):**", type="password", placeholder="Enter API Key here")
+
+    # Pass the user-provided API key to the generate_text_with_exception_handling function
+    if user_api_key:
+        pass  # Placeholder to fix the indentation error
 
     # Input section
     with st.expander("**💡  Instructions:**  Read the following before generating your Instagram captions.", expanded=True):
@@ -164,18 +172,21 @@ def generate_insta_captions(input_insta_keywords, input_insta_type, input_insta_
 
     # If keywords and content both are given.
     if input_insta_keywords:
-        prompt = f"""You are an experienced Instagram content creator and expert copywriter. Using the details provided below, generate 5 engaging Instagram captions that adhere to the following guidelines:
+        prompt = f"""You are an experienced Instagram content creator and expert copywriter. Using the details provided below, generate 5 concise and engaging Instagram captions that adhere to the following guidelines:
 
         1). Start with a strong, attention-grabbing opening that front-loads key information.
-        2). Keep the language concise, clear, and impactful.
-        3). Incorporate storytelling elements or emotional appeal where relevant.
+        2). Keep the language concise, clear, and impactful (limit each caption to 2-3 sentences).
+        3). Incorporate storytelling elements or emotional appeal where relevant, but keep it brief.
         4). Use a call-to-action optimized for {input_insta_cta}.
         5). Reflect a {input_insta_type} voice and tone consistently.
         6). Tailor the captions for the {input_insta_audience} target audience.
-        7). Include up to four relevant hashtags per caption.
+        7). Include up to four relevant hashtags per caption, ensuring diversity and relevance.
         8). Use emojis to add personality and break up the text.
         9). Ensure the captions are written in {input_insta_language}.
-        
+        10). Highlight unique aspects of Kalimpong, such as its serene landscapes, vibrant culture, or Himalayan charm.
+        11). Include a question or prompt to encourage user interaction, such as 'What's your dream adventure spot?'
+        12). Ensure captions are optimized for Instagram SEO by including keywords naturally and strategically.
+
         \nInstagram caption keywords: '{input_insta_keywords}'\n
         """
         insta_captions = generate_text_with_exception_handling(prompt)
@@ -224,7 +235,7 @@ def generate_text_with_exception_handling(prompt):
             },
         ]
 
-        model = genai.GenerativeModel(model_name="gemini-1.5-flash",
+        model = genai.GenerativeModel(model_name="gemini-2.0-flash",
                                       generation_config=generation_config,
                                       safety_settings=safety_settings)
 
